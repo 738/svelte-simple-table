@@ -1,47 +1,46 @@
 <script>
-    import { beforeUpdate, afterUpdate } from 'svelte';
+    import { sortingColumn, sortingColumnFlag } from "../stores/TableStore.js";
 
     export let columns = [];
-    export let sortingEnabled = true;
-
-    let sortingColumn;
-    let sortingColumnFlag;  // 1: 오름차순, -1: 내림차순, 0: 정렬 X
+    // export let sortingEnabled = true;
 
     function setSortingColumn(column) {
-        if (sortingColumn === column && sortingColumnFlag === 1) {
-            sortingColumnFlag = -1;
-        } else if (sortingColumn === column && sortingColumnFlag === -1) {
-            sortingColumnFlag = 0;
+        if ($sortingColumn === column && $sortingColumnFlag === 1) {
+            sortingColumnFlag.set(-1);
+        } else if ($sortingColumn === column && $sortingColumnFlag === -1) {
+            sortingColumnFlag.set(0);
         } else {
-            sortingColumn = column;
-            sortingColumnFlag = 1;
+            sortingColumn.set(column);
+            sortingColumnFlag.set(1);
         }
     }
-    //↓ ↑
+
     $: getSortingSpecialCharacter = (column) => {
-        if (sortingColumn === column && sortingColumnFlag === 1) {
+        if ($sortingColumn === column && $sortingColumnFlag === 1) {
             return '↓';
-        } else if (sortingColumn === column && sortingColumnFlag === -1) {
+        } else if ($sortingColumn === column && $sortingColumnFlag === -1) {
             return '↑';
         }
         return '';
     }
-
-    afterUpdate(() => {
-        console.log(sortingColumn)
-    });
 </script>
 
 <style>
     th {
 		border: 1px solid black;
+        width: 200px;
 	}
+    thead tr {
+        display: block;
+    }
 </style>
 
-<tr>
-{#each columns as column, index}
-    <th key={index} on:click={()=>{
-        setSortingColumn(column)
-    }}>{column} {getSortingSpecialCharacter(column)}</th>
-{/each}
-</tr>
+<thead>
+    <tr>
+    {#each columns as column, index}
+        <th key={index} on:click={()=>{
+            setSortingColumn(column)
+        }}>{column} {getSortingSpecialCharacter(column)}</th>
+    {/each}
+    </tr>
+</thead>

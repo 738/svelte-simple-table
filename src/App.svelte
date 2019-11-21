@@ -17,7 +17,7 @@
 	{#await promise}
 	<p>waiting...</p>
 	{:then data}
-	<Table columns={data.columns} rowData={data.entities}/>
+	<Table columns={data.columns} rowData={data.entities} tbodyHeight={600} emptyValue='빈 값입니다.'/>
 	{:catch error}
 	<p style="color: red">{error}</p>
 	{/await}
