@@ -4,3 +4,4 @@ import { writable } from 'svelte/store';
 // export const rowData = writable([]);
 export const sortingColumn = writable(null);
 export const sortingColumnFlag = writable(0);
+export const currentPageNumber = writable(1);

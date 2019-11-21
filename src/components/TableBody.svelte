@@ -1,11 +1,11 @@
 <script>
-    import { sortingColumn, sortingColumnFlag } from "../stores/TableStore.js";
+    import { sortingColumn, sortingColumnFlag, currentPageNumber } from "../stores/TableStore.js";
     export let columns = [];
     export let rowData = [];
     export let tbodyHeight;
     export let emptyValue;
-
-    // $: console.log(rowData)
+    export let paginationRow;
+    
     $: getSortedData = () => {
         let changedData = [...rowData];
         if ($sortingColumn !== null) {
@@ -23,17 +23,16 @@
                 changedData = rowData.slice();
             }
         }
-        console.log(changedData.map(v=>v[$sortingColumn]))
-        return changedData;
+        return changedData
     }
-
     $: sortedData = getSortedData()
+    $: slicedData = sortedData.slice(($currentPageNumber - 1)*paginationRow, $currentPageNumber*paginationRow)
 </script>
 
 <style>
 td {
     border: 1px solid black;
-    width: 200px;
+    min-width: 200px;
 }
 
 tbody {
@@ -44,10 +43,10 @@ tbody {
 </style>
 
 <tbody style={`height: ${tbodyHeight}px`}>
-    {#each sortedData as item, itemIndex}
-        <tr>
-            {#each columns as d (d['nccCampaignId'])}
-            <td>{item[d] || emptyValue}</td>
+    {#each slicedData as item, itemIndex}
+        <tr key={itemIndex}>
+            {#each columns as column}
+            <td>{item[column] || emptyValue}</td>
             {/each}
         </tr>
     {/each}

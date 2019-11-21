@@ -6,7 +6,6 @@
 		let columns = await responseOfColumns.json();
 		let responseOfEntities = await fetch('http://106.10.34.16:4188/entities');
 		let entities = await responseOfEntities.json();
-		console.log(columns, entities);
 		return {columns, entities};
 	}
 
@@ -17,7 +16,7 @@
 	{#await promise}
 	<p>waiting...</p>
 	{:then data}
-	<Table columns={data.columns} rowData={data.entities} tbodyHeight={600} emptyValue='빈 값입니다.'/>
+	<Table columns={data.columns} rowData={data.entities} tbodyHeight={600} emptyValue='빈 값입니다.' paginationRow={25}/>
 	{:catch error}
 	<p style="color: red">{error}</p>
 	{/await}

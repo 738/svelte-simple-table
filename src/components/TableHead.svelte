@@ -28,7 +28,7 @@
 <style>
     th {
 		border: 1px solid black;
-        width: 200px;
+        min-width: 200px;
 	}
     thead tr {
         display: block;
@@ -38,7 +38,7 @@
 <thead>
     <tr>
     {#each columns as column, index}
-        <th key={index} on:click={()=>{
+        <th key={index} on:click={() => {
             setSortingColumn(column)
         }}>{column} {getSortingSpecialCharacter(column)}</th>
     {/each}
