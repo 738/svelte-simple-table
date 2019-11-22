@@ -2,6 +2,7 @@
   import TableHead from "./TableHead.svelte";
   import TableBody from "./TableBody.svelte";
   import TablePagination from "./TablePagination.svelte";
+  import TableFilter from './TableFilter.svelte';
   import {
     _columns,
     _rowData,
@@ -42,6 +43,9 @@
   _emptyValue.set(emptyValue);
 </script>
 
+{#if $_filterEnabled}
+  <TableFilter />
+{/if}
 <div class="table-wrap">
     <table>
       <TableHead />

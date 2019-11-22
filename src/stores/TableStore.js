@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 import SortedBy from '../models/SortedBy';
-import FilterMode from '../models/FilterMode';
+import FilterMode, { FilterModeBooleanOption, FilterModeNumberOption } from '../models/FilterMode';
 
 // properties
 export const _columns = writable([]);
@@ -20,3 +20,6 @@ export const _sortingColumnFlag = writable(SortedBy.NONE);
 export const _currentPageNumber = writable(1);
 export const _filterSelectedColumn = writable(null);
 export const _filterMode = writable(FilterMode.NONE);
+export const _filterInputText = writable('');
+export const _filterNumberOption = writable(FilterModeNumberOption.EQ);
+export const _filterBooleanOption = writable(FilterModeBooleanOption.TRUE);
