@@ -19,8 +19,15 @@
         }
         return changedData
     }
-    $: resultData = getSortedData()
-    $: if ($_paginationEnabled) resultData = resultData.slice(($_currentPageNumber - 1)*$_paginationRow, $_currentPageNumber*$_paginationRow)
+    $: sortedData = getSortedData()
+
+    let slicedData;
+    $: if ($_paginationEnabled) {
+        slicedData = sortedData.slice(($_currentPageNumber - 1)*$_paginationRow, $_currentPageNumber*$_paginationRow);
+    } else {
+        slicedData = sortedData;
+    }
+
 </script>
 
 <style>
@@ -37,7 +44,7 @@ tbody {
 </style>
 
 <tbody>
-    {#each resultData as item, itemIndex}
+    {#each slicedData as item, itemIndex}
         <tr key={itemIndex}>
             {#each $_columns as column}
             <td>{item[column] || $_emptyValue}</td>
