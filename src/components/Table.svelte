@@ -42,18 +42,18 @@
   _emptyValue.set(emptyValue);
 </script>
 
-<div id="table-container">
+<div class="table-wrap">
     <table>
       <TableHead />
       <TableBody />
     </table>
-    {#if $_paginationEnabled}
-      <TablePagination />
-    {/if}
 </div>
+{#if $_paginationEnabled}
+  <TablePagination />
+{/if}
 
 <style>
-	table {
+	/* table {
 		border-collapse: collapse;
         border: 1px solid black;
         width: 100%;
@@ -62,5 +62,20 @@
         display: block;
         overflow-x: auto;
         white-space: nowrap;
-	}
+	} */
+  .table-wrap {
+    display: block;
+    position: relative;
+    max-width: 100vw;
+    
+    /* 100view height - paginator height */
+    max-height: calc(100vh - 95px);
+    overflow-x: auto;
+  }
+
+  .table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
 </style>

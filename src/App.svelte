@@ -22,7 +22,7 @@
 		sortingEnabled={true}
 		filterEnabled={true}
 		paginationEnabled={true}
-		paginationRow={10}
+		paginationRow={25}
 		firstRowFixed={false}
 		emptyValue='빈 값입니다.'
 	/>

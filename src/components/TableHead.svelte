@@ -34,6 +34,23 @@
         position: sticky;
         top: 0;
     }
+
+    tr:first-child th {
+        position: sticky;
+        box-shadow: inset 0 1px 0 gray,
+                    inset 0 -1px 0 gray;
+        top: 0px;
+    }
+
+    th {
+        background-color: #eeeeee;
+    }
+
+    th {
+        height: 50px;
+        min-width: 170px;
+        border: 1px solid gray;
+    }
 </style>
 
 <thead>
