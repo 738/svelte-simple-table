@@ -23,7 +23,7 @@
 		filterEnabled={true}
 		paginationEnabled={true}
 		paginationRow={25}
-		firstRowFixed={false}
+		firstRowFixed={true}
 		emptyValue='빈 값입니다.'
 	/>
 	{:catch error}

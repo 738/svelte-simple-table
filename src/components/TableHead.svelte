@@ -1,6 +1,7 @@
 <script>
-    import { _columns, _sortingColumn, _sortingColumnFlag, _sortingEnabled } from "../stores/TableStore.js";
+    import { _columns, _sortingColumn, _sortingColumnFlag, _sortingEnabled, _firstRowFixed } from "../stores/TableStore.js";
     import SortedBy from '../models/SortedBy.js';
+    import classNames from '../utils/classNames.js';
 
     function set_SortingColumn(column) {
         if ($_sortingColumn === column && $_sortingColumnFlag === SortedBy.ASC) {
@@ -24,22 +25,15 @@
 </script>
 
 <style>
-    th {
-		border: 1px solid black;
-        min-width: 200px;
-        
-	}
-    thead tr {
-        /* display: block; */
-        position: sticky;
-        top: 0;
-    }
-
-    tr:first-child th {
+    th.sticky {
         position: sticky;
         box-shadow: inset 0 1px 0 gray,
                     inset 0 -1px 0 gray;
         top: 0px;
+    }
+
+    th.sorting-enabled {
+        cursor: pointer;
     }
 
     th {
@@ -56,10 +50,17 @@
 <thead>
     <tr>
     {#each $_columns as column, index}
-        <th style={$_sortingEnabled && "cursor: pointer;"} key={index} on:click={() => {
+        <th class={classNames({
+                'sticky': $_firstRowFixed,
+                'sorting-enabled': $_sortingEnabled,
+            })}
+            key={index}
+            on:click={() => {
             if (!$_sortingEnabled) return;
             set_SortingColumn(column)
-        }}>{column} {getSortingSpecialCharacter(column)}</th>
+        }}>
+            {column} {getSortingSpecialCharacter(column)}
+        </th>
     {/each}
     </tr>
 </thead>
