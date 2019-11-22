@@ -28,10 +28,10 @@ npm install svelte-simple-table
 | columns | []      | `Array` | Y |             |
 | rowData | []      | `Array` | Y |           |
 | sortingEnabled | true | `Boolean` | N |          |
+| FilterEnabled | true | `Boolean` | N |          |
 | paginationEnabled | true | `Boolean` | N |          |
 | paginationRow | 10 | `Number` | N |          |
 | firstRowFixed | true | `Boolean` | N |         |
-| tbodyHeight | 500 | `Number` | N | `px`     |
 | columnFixed | false | `Boolean` | N |         |
 | fixedColumn | 1 | `Number` | N |          |
 | emptyValue | '' | `Any` | N |          |
