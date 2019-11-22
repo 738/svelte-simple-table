@@ -7,19 +7,21 @@
         if ($_sortingColumn !== null) {
             if ($_sortingColumnFlag === SortedBy.ASC) {
                 changedData = $_rowData.slice().sort((a,b)=>{
-                    if (!a[$_sortingColumn]) return 1;
+                    if (typeof(a[$_sortingColumn]) === 'number' && typeof(b[$_sortingColumn]) === 'number'
+                     || typeof(a[$_sortingColumn]) === 'boolean' && typeof(b[$_sortingColumn]) === 'boolean') return a[$_sortingColumn] - b[$_sortingColumn];
                     return (a[$_sortingColumn]+'').localeCompare((b[$_sortingColumn]+''));
                 });
             } else if ($_sortingColumnFlag === SortedBy.DESC) {
                 changedData = $_rowData.slice().sort((a,b)=>{
-                    if (!b[$_sortingColumn]) return 1;
+                    if (typeof(a[$_sortingColumn]) === 'number' && typeof(b[$_sortingColumn]) === 'number'
+                     || typeof(a[$_sortingColumn]) === 'boolean' && typeof(b[$_sortingColumn]) === 'boolean') return b[$_sortingColumn] - a[$_sortingColumn];
                     return (b[$_sortingColumn]+'').localeCompare((a[$_sortingColumn]+''));
                 })
             }
         }
-        return changedData
+        return changedData;
     }
-    $: sortedData = getSortedData()
+    $: sortedData = getSortedData();
 
     let slicedData;
     $: if ($_paginationEnabled) {
@@ -55,7 +57,7 @@ td {
     {#each slicedData as item, itemIndex}
         <tr key={itemIndex}>
             {#each $_columns as column}
-            <td>{item[column] || $_emptyValue}</td>
+            <td>{item[column] !== undefined ? item[column] : $_emptyValue}</td>
             {/each}
         </tr>
     {/each}

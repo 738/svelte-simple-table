@@ -3,13 +3,13 @@
     import SortedBy from '../models/SortedBy.js';
     import classNames from '../utils/classNames.js';
 
-    function set_SortingColumn(column) {
+    function setSortingColumn(column) {
+        _sortingColumn.set(column);
         if ($_sortingColumn === column && $_sortingColumnFlag === SortedBy.ASC) {
             _sortingColumnFlag.set(SortedBy.DESC);
         } else if ($_sortingColumn === column && $_sortingColumnFlag === SortedBy.DESC) {
             _sortingColumnFlag.set(SortedBy.NONE);
         } else {
-            _sortingColumn.set(column);
             _sortingColumnFlag.set(SortedBy.ASC);
         }
     }
@@ -57,7 +57,7 @@
             key={index}
             on:click={() => {
             if (!$_sortingEnabled) return;
-            set_SortingColumn(column)
+            setSortingColumn(column)
         }}>
             {column} {getSortingSpecialCharacter(column)}
         </th>

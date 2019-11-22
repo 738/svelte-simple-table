@@ -21,7 +21,7 @@
 		rowData={data.entities}
 		sortingEnabled={true}
 		filterEnabled={true}
-		paginationEnabled={true}
+		paginationEnabled={false}
 		paginationRow={25}
 		firstRowFixed={true}
 		emptyValue='빈 값입니다.'
