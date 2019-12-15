@@ -57,16 +57,6 @@
 {/if}
 
 <style>
-	/* table {
-		border-collapse: collapse;
-        border: 1px solid black;
-        width: 100%;
-        position: relative;
-
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-	} */
   .table-wrap {
     display: block;
     position: relative;
